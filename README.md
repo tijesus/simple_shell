@@ -1,4 +1,4 @@
-Simple Shell Project
+SIMPLE SHELL PROJECT
 Collaborators:
-Praise Josiah
-Gabriel Emmanuel
+  Praise Josiah
+  Gabriel Emmanuel
