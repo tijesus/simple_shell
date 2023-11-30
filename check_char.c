@@ -8,6 +8,7 @@
 void check_char(char *input, size_t size)
 {
 	ssize_t count_chars;
+	int i;
 
 	size = 0;
 	input = NULL;
@@ -17,7 +18,11 @@ void check_char(char *input, size_t size)
 		exit(EXIT_FAILURE);
 	}
 
-	input[count_chars - 1] = '\0';
+	for (i = 0; input[i] != '\0'; i++)
+	{
+		if (input[i] == '\n')
+		input[i] = '\0';
+	}
 	exec_input(input);
 }
 

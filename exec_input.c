@@ -5,20 +5,22 @@
 */
 void exec_input(char *input)
 {
-	char *arg[] = {NULL, NULL};
+	char *arg[20];
 	pid_t child_pid;
-	int status;
+	int i, status;
 
 	arg[0] = input;
 	child_pid = fork();
 	if (child_pid == -1)
+		perror("fork error");
+	else if (child_pid == 0)
 	{
-		perror("fork");
-		free(input);
-		exit(EXIT_FAILURE);
-	}
-	if (child_pid == 0)
-	{
+		arg[0] = strtok(input, " ");
+		i = 1;
+		while ((arg[i] = strtok(NULL, " ")) != NULL)
+			i++;
+		arg[i] = NULL;
+
 		if (execve(arg[0], arg, NULL) == -1)
 		{
 			perror("./shell");
@@ -26,5 +28,5 @@ void exec_input(char *input)
 		}
 	}
 	else
-		wait(&status);
+		waitpid(child_pid, &status, 0);
 }
