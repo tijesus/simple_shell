@@ -15,12 +15,12 @@ void exec_input(char *input)
 		perror("fork error");
 	else if (child_pid == 0)
 	{
+		/*seperate strings passed into the terminal*/
 		arg[0] = strtok(input, " ");
 		i = 1;
 		while ((arg[i] = strtok(NULL, " ")) != NULL)
 			i++;
 		arg[i] = NULL;
-
 		if (execve(arg[0], arg, NULL) == -1)
 		{
 			perror("./shell");

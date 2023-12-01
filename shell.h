@@ -15,6 +15,7 @@
 
 void exec_input(char *input);
 int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
 void _print(char *display);
 void check_char(char *input, size_t size);
 

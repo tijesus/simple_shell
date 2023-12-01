@@ -8,6 +8,7 @@
 void check_char(char *input, size_t size)
 {
 	ssize_t count_chars;
+	char *input_cpy = NULL;
 	int i;
 
 	size = 0;
@@ -17,7 +18,13 @@ void check_char(char *input, size_t size)
 	{
 		exit(EXIT_FAILURE);
 	}
-
+	input_cpy = malloc(sizeof(char) * count_chars);
+	if (input_cpy == NULL)
+	{
+		free(input_cpy);
+		exit(EXIT_FAILURE);
+	}
+	strcpy(input_cpy, input);
 	for (i = 0; input[i] != '\0'; i++)
 	{
 		if (input[i] == '\n')
