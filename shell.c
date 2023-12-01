@@ -9,7 +9,7 @@ int main(void)
 
 	while (true)
 	{
-		_print("Tijesus$ ");
+		_print("cisfun$ ");
 		check_char(input, sizeof(input));
 
 	}
