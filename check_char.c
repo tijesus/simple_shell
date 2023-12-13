@@ -53,7 +53,7 @@ int check_char(char *input, char *envp[], int count, char *argv)
 	int exit_status = 0;
 	size_t size = 0;
 
-	count_chars = getline(&input, &size, stdin);
+	count_chars = _getline(&input, &size, stdin);
 	if (count_chars == -1)
 	{
 		free(input);
