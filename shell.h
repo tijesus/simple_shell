@@ -28,8 +28,5 @@ char *_strpbrk(const char *str, const char *charset);
 char *getpath(char *str, int count, char *argv);
 void print_environment(char *envp[]);
 int _isspace(char ch);
-ssize_t _getline(char **lnptr, size_t *n, FILE *stream);
-char *_memoryAlloc(char **lnptr, size_t *n, size_t new_size);
-ssize_t rdline(char *buf, size_t *buf_pos, char **lnptr, size_t *n, size_t cnt);
 
 #endif
