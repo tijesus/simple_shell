@@ -8,9 +8,10 @@
 */
 int all_space(char *input)
 {
-	int is_all_whitespace = 1;
+	int __attribute((unused)) is_all_whitespace = 1;
+	int i;
 
-	for (int i = 0; input[i] != '\0'; i++)
+	for (i = 0; input[i] != '\0'; i++)
 	{
 		if (!_isspace(input[i]))
 		{
@@ -28,7 +29,9 @@ int all_space(char *input)
 */
 char *null_term(char *input)
 {
-	for (int i = 0; input[i] != '\0'; i++)
+	int i;
+
+	for (i = 0; input[i] != '\0'; i++)
 	{
 		if (input[i] == '\n')
 			input[i] = '\0';
@@ -48,8 +51,9 @@ int check_char(char *input, char *envp[], int count, char *argv)
 {
 	ssize_t count_chars;
 	int exit_status = 0;
+	size_t size = 0;
 
-	count_chars = getline(&input, &(size_t){0}, stdin);
+	count_chars = getline(&input, &size, stdin);
 	if (count_chars == -1)
 	{
 		free(input);

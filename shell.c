@@ -6,10 +6,9 @@
  * @envp: array of environment variables as strings
  * Return: 0 success
  */
-int main(int argc, char *argv[], char *envp[])
+int main(int __attribute__((unused)) argc, char *argv[], char *envp[])
 {
 	char *input = NULL;
-	size_t size = 0;
 	int count = 0;
 	int exit_status = 0;
 	int _stat;
