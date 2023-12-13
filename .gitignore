@@ -2,6 +2,7 @@ shell
 ls.txt
 a.out
 TEST_SUITE/
+TEST_SUITES/
 allowed_functions
 runchecker.bash
 hsh
