@@ -1,16 +1,50 @@
 #include "shell.h"
 /**
  * main - entry point
+ * @argc: argument count
+ * @argv: array of strings
+ * @envp: array of environment variables as strings
  * Return: 0 success
-*/
-int main(void)
+ */
+int main(int argc, char *argv[], char *envp[])
 {
-	char input[200];
+	char *input = NULL;
+	size_t size = 0;
+	int count = 0;
+	int exit_status = 0;
+	int _stat;
 
-	while (true)
+	if (isatty(STDIN_FILENO))
 	{
-		_print("cisfun$ ");
-		check_char(input, sizeof(input));
-
+		while (1)
+		{
+			count++;
+			_print("cisfun$ ");
+			_stat = check_char(input, envp, count, argv[0]);
+			if (_stat != EOF && _stat != 7)
+				exit_status = _stat;
+			else if (_stat == 7)
+			{
+				exit_status = 0;
+				continue;
+			}
+			else if (_stat == EOF)
+				exit(0);
+		}
 	}
+	else
+	{
+		while (1)
+		{
+			count++;
+			_stat = check_char(input, envp, count, argv[0]);
+			if (_stat == 7)
+				exit_status = 0;
+			if (_stat != EOF && _stat != 7)
+				exit_status = _stat;
+			else
+				exit(exit_status);
+		}
+	}
+	return (exit_status);
 }

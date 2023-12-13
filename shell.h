@@ -12,12 +12,21 @@
 #include <sys/time.h>
 #include <stdbool.h>
 #include <sys/wait.h>
+#include <errno.h>
+#define BUFFSIZE 1064
 
-void exec_input(char *input);
+int _strcmp(const char *str1, const char *str2);
+char *_strtok(char *str, char *delim);
+char *_removeExtraSpaces(char *input);
+int exec_input(char *input, char *envp[], int count, char *argv);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 void _print(char *display);
-void check_char(char *input, size_t size);
-
+int check_char(char *input, char *envp[], int count, char *argv);
+void _fill_buff_(char *dest, char *source);
+char *_strpbrk(const char *str, const char *charset);
+char *getpath(char *str, int count, char *argv);
+void print_environment(char *envp[]);
+int _isspace(char ch);
 
 #endif

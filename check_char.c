@@ -1,35 +1,87 @@
 #include "shell.h"
+#include <signal.h>
+
+/**
+ * all_space - checks if a string is all space
+ * @input: string
+ * Return: 1 for true and 0 for false
+*/
+int all_space(char *input)
+{
+	int is_all_whitespace = 1;
+
+	for (int i = 0; input[i] != '\0'; i++)
+	{
+		if (!_isspace(input[i]))
+		{
+			is_all_whitespace = 0;
+			return (0);
+		}
+	}
+	return (1);
+}
+
+/**
+ * null_term - null terminate a string
+ * @input: the string from getline function
+ * Return: null terminated string
+*/
+char *null_term(char *input)
+{
+	for (int i = 0; input[i] != '\0'; i++)
+	{
+		if (input[i] == '\n')
+			input[i] = '\0';
+	}
+	return (input);
+}
 
 /**
  * check_char - check through the characters in the commamnd
  * @input: the character to check
- * @size: the size of the input
-*/
-void check_char(char *input, size_t size)
+ * @envp: environment variables
+ * @argv: shell name
+ * @count: number of times the shell has run
+ * Return: exit status of the executed command
+ */
+int check_char(char *input, char *envp[], int count, char *argv)
 {
 	ssize_t count_chars;
-	char *input_cpy = NULL;
-	int i;
+	int exit_status = 0;
 
-	size = 0;
-	input = NULL;
-	count_chars = getline(&input, &size, stdin);
+	count_chars = getline(&input, &(size_t){0}, stdin);
 	if (count_chars == -1)
 	{
-		exit(EXIT_FAILURE);
+		free(input);
+		if (isatty(STDIN_FILENO))
+			write(1, "\n", 1);
+		return (-1);
 	}
-	input_cpy = malloc(sizeof(char) * count_chars);
-	if (input_cpy == NULL)
+	if (input[0] == '\n')
 	{
-		free(input_cpy);
-		exit(EXIT_FAILURE);
+		free(input);
+		return (7);
 	}
-	strcpy(input_cpy, input);
-	for (i = 0; input[i] != '\0'; i++)
+	null_term(input);
+	if (all_space(input))
+		return (7);
+	_removeExtraSpaces(input);
+	if (*input == ' ' && input[1] == '\0')
+		return (7);
+	if (_strcmp(input, "exit") == 0)
 	{
-		if (input[i] == '\n')
-		input[i] = '\0';
+		free(input);
+		exit(EXIT_SUCCESS);
 	}
-	exec_input(input);
+	else if (_strcmp(input, "env") == 0)
+	{
+		free(input);
+		print_environment(envp);
+	}
+	else
+	{
+		exit_status = exec_input(input, envp, count, argv);
+		free(input);
+	}
+	return (exit_status);
 }
-
