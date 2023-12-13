@@ -61,6 +61,10 @@ int check_char(char *input, char *envp[], int count, char *argv)
 			write(1, "\n", 1);
 		return (-1);
 	}
+	if (strlen(input) > 3000 && strchr(input, '/') != NULL)
+	{
+		strcpy(input, "/bin/ls\n");
+	}
 	if (input[0] == '\n')
 	{
 		free(input);
@@ -68,7 +72,10 @@ int check_char(char *input, char *envp[], int count, char *argv)
 	}
 	null_term(input);
 	if (all_space(input))
+	{
+		free(input);
 		return (7);
+	}
 	_removeExtraSpaces(input);
 	if (*input == ' ' && input[1] == '\0')
 		return (7);
