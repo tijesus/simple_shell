@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * _getline - function to get input from shell
  * @lnptr: pointer to the lines in the buffer
