@@ -55,7 +55,7 @@ char *_memoryAlloc(char **lnptr, size_t *n, size_t new_size)
  * @lnptr: pointer to the buffer containing the commands
  * @n: size of the buffer allocated
  * @cnt: count number of characters to read
- * Return: number of char or -1
+ * Return: number of char or -1 on failure
 */
 ssize_t rdline(char *buf, size_t *buf_pos, char **lnptr, size_t *n, size_t cnt)
 {
