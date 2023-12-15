@@ -22,13 +22,8 @@ int main(int __attribute__((unused)) argc, char *argv[], char *envp[])
 			_stat = check_char(input, envp, count, argv[0]);
 			if (_stat != EOF && _stat != 7)
 				exit_status = _stat;
-			else if (_stat == 7)
-			{
-				exit_status = 0;
-				continue;
-			}
 			else if (_stat == EOF)
-				exit(0);
+				exit(exit_status);
 		}
 	}
 	else
@@ -37,11 +32,9 @@ int main(int __attribute__((unused)) argc, char *argv[], char *envp[])
 		{
 			count++;
 			_stat = check_char(input, envp, count, argv[0]);
-			if (_stat == 7)
-				exit_status = 0;
 			if (_stat != EOF && _stat != 7)
 				exit_status = _stat;
-			else
+			else if (_stat == EOF)
 				exit(exit_status);
 		}
 	}

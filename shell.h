@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <limits.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -18,15 +19,18 @@
 int _strcmp(const char *str1, const char *str2);
 char *_strtok(char *str, char *delim);
 char *_removeExtraSpaces(char *input);
-int exec_input(char *input, char *envp[], int count, char *argv);
+int exec_input(char **args, char *envp[], int count, char *argv);
 int _strlen(char *s);
 char *_strcpy(char *dest, char *src);
 void _print(char *display);
 int check_char(char *input, char *envp[], int count, char *argv);
 void _fill_buff_(char *dest, char *source);
 char *_strpbrk(const char *str, const char *charset);
-char *getpath(char *str, int count, char *argv);
+int getpath(char **args, int count, char *argv);
+char *_getpath(char *str);
 void print_environment(char *envp[]);
 int _isspace(char ch);
+char **tokenizeAndRemoveWhitespace(char *input);
+void freeTokens(char **tokens);
 
 #endif

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/praise-afk/simple_shell",
-      "program": "/home/praise-afk/simple_shell/build/Debug/outDebug",
+      "cwd": "/home/praise-afk/hell/simple_shell",
+      "program": "/home/praise-afk/hell/simple_shell/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

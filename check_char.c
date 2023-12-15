@@ -52,6 +52,7 @@ int check_char(char *input, char *envp[], int count, char *argv)
 	ssize_t count_chars;
 	int exit_status = 0;
 	size_t size = 0;
+	char **args = NULL;
 
 	count_chars = getline(&input, &size, stdin);
 	if (count_chars == -1)
@@ -61,38 +62,27 @@ int check_char(char *input, char *envp[], int count, char *argv)
 			write(1, "\n", 1);
 		return (-1);
 	}
-	if (strlen(input) > 3000 && strchr(input, '/') != NULL)
-	{
-		strcpy(input, "/bin/ls\n");
-	}
-	if (input[0] == '\n')
-	{
-		free(input);
-		return (7);
-	}
+
 	null_term(input);
-	if (all_space(input))
-	{
-		free(input);
+	args = tokenizeAndRemoveWhitespace(input);
+
+	if (args == NULL)
 		return (7);
-	}
-	_removeExtraSpaces(input);
-	if (*input == ' ' && input[1] == '\0')
-		return (7);
-	if (_strcmp(input, "exit") == 0)
+
+	if (_strcmp(args[0], "exit") == 0)
 	{
-		free(input);
-		exit(EXIT_SUCCESS);
+		freeTokens(args);
+		return (-1);
 	}
-	else if (_strcmp(input, "env") == 0)
+
+	else if (_strcmp(args[0], "env") == 0)
 	{
-		free(input);
+		freeTokens(args);
 		print_environment(envp);
 	}
+
 	else
-	{
-		exit_status = exec_input(input, envp, count, argv);
-		free(input);
-	}
+		exit_status = exec_input(args, envp, count, argv);
+
 	return (exit_status);
 }
