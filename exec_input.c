@@ -11,7 +11,7 @@
 int exec_input(char **args, char *envp[], int count, char *argv)
 {
 	pid_t child_pid;
-	int i, status, exit_status = 0;
+	int status, exit_status = 0;
 
 	if (getpath(args, count, argv) == 127)
 		return (127); /*Return 127 for failure*/

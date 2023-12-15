@@ -86,14 +86,15 @@ static char **tokenize(const char *input, int tokenCount)
 char **tokenizeAndRemoveWhitespace(char *input)
 {
 	int tokenCount = countTokens(input);
+	char **tokens;
 
-	if (tokenCount == 0)
+		if (tokenCount == 0)
 	{
 		free(input);
 		return (NULL);
 	}
 
-	char **tokens = tokenize(input, tokenCount);
+	tokens = tokenize(input, tokenCount);
 
 	free(input);
 	return (tokens);
@@ -105,7 +106,9 @@ char **tokenizeAndRemoveWhitespace(char *input)
  */
 void freeTokens(char **tokens)
 {
-	for (int i = 0; tokens[i]; i++)
+	int i;
+
+	for (i = 0; tokens[i]; i++)
 		free(tokens[i]);
 	free(tokens);
 }
