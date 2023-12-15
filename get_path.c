@@ -136,8 +136,7 @@ int getpath(char **args, int count, char *argv)
 			fprintf(stderr, "%s: %d: %s: not found\n", argv, count, temp);
 			return (127);
 		}
-	}
-	else
+	} else if (args[0][0] != '/')
 	{
 		path = _getpath(args[0]);
 		if (path == NULL)
@@ -151,6 +150,10 @@ int getpath(char **args, int count, char *argv)
 			free(args[0]);
 			args[0] = path;
 		}
+	} else
+	{
+		if (invalid_absolute_path(args) == 127)
+			return (127);
 	}
 	return (0);
 }

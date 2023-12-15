@@ -16,6 +16,7 @@
 #include <errno.h>
 #define BUFFSIZE 1064
 
+int invalid_absolute_path(char **args);
 int _strcmp(const char *str1, const char *str2);
 char *_strtok(char *str, char *delim);
 char *_removeExtraSpaces(char *input);
