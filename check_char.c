@@ -1,27 +1,5 @@
 #include "shell.h"
 #include <signal.h>
-
-/**
- * all_space - checks if a string is all space
- * @input: string
- * Return: 1 for true and 0 for false
-*/
-int all_space(char *input)
-{
-	int __attribute((unused)) is_all_whitespace = 1;
-	int i;
-
-	for (i = 0; input[i] != '\0'; i++)
-	{
-		if (!_isspace(input[i]))
-		{
-			is_all_whitespace = 0;
-			return (0);
-		}
-	}
-	return (1);
-}
-
 /**
  * null_term - null terminate a string
  * @input: the string from getline function

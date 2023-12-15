@@ -72,6 +72,8 @@ char *_getpath(char *str)
 
 	cmd = _strtok(str, " ");
 	path = getenv("PATH");
+	if (path == NULL)
+		return (NULL);
 	_fill_buff_(path_cpy, path);
 	path_token = _strtok(path_cpy, ":");
 	if (cmd == NULL)
